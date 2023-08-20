@@ -6,11 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/Icon/restaurant.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
+    
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -19,12 +15,17 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.piyushgupta.YumHub"
     },
     "web": {
       "favicon": "./assets/Icon/restaurant.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "32eded1e-8dab-49cc-8be1-1d841d7febf1"
+      }
     }
   }
 }
