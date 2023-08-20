@@ -78,7 +78,7 @@ const style = StyleSheet.create({
   },
   details: {
     paddingHorizontal: 20,
-    paddingTop: 40,
+    paddingTop: 25,
     paddingBottom: 60,
     backgroundColor: COLORS.primary,
     borderTopRightRadius: 40,
@@ -95,7 +95,7 @@ const style = StyleSheet.create({
     marginTop: 10,
   },
   price: {
-    backgroundColor: COLORS.yellow,
+    backgroundColor: COLORS.white,
     padding: 10,
     borderRadius: 20,
     alignItems: "center",
