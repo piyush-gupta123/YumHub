@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import {
   Dimensions,
   Image,
@@ -6,49 +6,84 @@ import {
   StyleSheet,
   Text,
   View,
-} from 'react-native';
+} from "react-native";
 import {
   FlatList,
   ScrollView,
   TextInput,
   TouchableHighlight,
-  TouchableOpacity,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import COLORS from '../consts/colors';
-import foods from '../consts/foods';
-const {width} = Dimensions.get('screen');
+} from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import COLORS from "../consts/colors";
+import foods from "../consts/foods";
+const { width } = Dimensions.get("screen");
 const cardWidth = width / 2 - 20;
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
+  const [searchText, setSearchText] = useState("");
+  const [searchTimeout, setSearchTimeout] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
 
-  const Card = ({food}) => {
+  const filterSearch = (item) => {
+    // console.log("start search");
+    const regex = new RegExp(item, "i");
+    return foods.filter((food) => {
+      regex.test(food.name) || regex.test(food.desc);
+    });
+  };
+
+  const handleSearchChange = (item) => {
+    if (item) {
+      clearTimeout(searchTimeout);
+      setSearchText(item.target.value);
+
+      setSearchTimeout(() => {
+        const searchResults = filterSearch(item.target.value);
+        setSearchResults(searchResults);
+      }, 1000);
+    }
+  };
+
+  const Card = ({ food }) => {
     return (
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => navigation.navigate('Details', food)}>
+        onPress={() => navigation.navigate("Details", food)}
+      >
         <View style={style.card}>
-          <View style={{alignItems: 'center', top: -40}}>
-            <Image source={food.image} style={{height: 130, width: 130, borderRadius: 15}} />
+          <View style={{ alignItems: "center", top: -40 }}>
+            <Image
+              source={food.image}
+              style={{ height: 130, width: 130, borderRadius: 15 }}
+            />
           </View>
-          <View style={{marginHorizontal: 20}}>
-            <Text style={{fontSize: 18, fontWeight: 'bold'}}>{food.name}</Text>
+          <View style={{ marginHorizontal: 20 }}>
+            <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+              {food.name}
+            </Text>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <Text numberOfLines={4} ellipsizeMode='tail'>
-                  {food.desc}
-                </Text>
-              </ScrollView>
+              <Text numberOfLines={4} ellipsizeMode="tail">
+                {food.desc}
+              </Text>
+            </ScrollView>
           </View>
           <View
             style={{
               marginTop: 5,
               marginHorizontal: 20,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            <Text style={{fontSize: 18, fontWeight: 'bold', color: COLORS.primary}}>
-              {food.price}
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "bold",
+                color: COLORS.primary,
+              }}
+            >
+              <Text style={{color: COLORS.black, fontSize: 15, fontWeight: 500}}>Price :</Text> {food.price}
             </Text>
           </View>
         </View>
@@ -56,16 +91,16 @@ const HomeScreen = ({navigation}) => {
     );
   };
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <View style={style.header}>
         <View>
-          <View style={{flexDirection: 'row', marginTop: 10}}>
-            <Text style={{fontSize: 28}}>Hello,</Text>
-            <Text style={{fontSize: 28, fontWeight: 'bold', marginLeft: 10}}>
+          <View style={{ flexDirection: "row", marginTop: 10 }}>
+            <Text style={{ fontSize: 28 }}>Hello,</Text>
+            <Text style={{ fontSize: 28, fontWeight: "bold", marginLeft: 10 }}>
               User
             </Text>
           </View>
-          <Text style={{marginTop: 5, fontSize: 22, color: COLORS.grey}}>
+          <Text style={{ marginTop: 5, fontSize: 22, color: COLORS.grey }}>
             What do you want today
           </Text>
         </View>
@@ -73,26 +108,38 @@ const HomeScreen = ({navigation}) => {
       <View
         style={{
           marginTop: 35,
-          flexDirection: 'row',
+          flexDirection: "row",
           paddingHorizontal: 20,
-        }}>
+        }}
+      >
         <View style={style.inputContainer}>
           <Icon name="search" size={28} />
           <TextInput
-            style={{flex: 1, fontSize: 18}}
+            style={{ flex: 1, fontSize: 18 }}
             placeholder="Search for food"
+            value={searchText}
+            onChange={handleSearchChange}
           />
         </View>
         <View style={style.sortBtn}>
           <Icon name="tune" size={28} color={COLORS.white} />
         </View>
       </View>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        numColumns={2}
-        data={foods}
-        renderItem={({item}) => <Card food={item} />}
-      />
+      {searchText ? (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
+          data={searchResults}
+          renderItem={({ item }) => <Card food={item} />}
+        />
+      ) : (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
+          data={foods}
+          renderItem={({ item }) => <Card food={item} />}
+        />
+      )}
     </SafeAreaView>
   );
 };
@@ -100,17 +147,17 @@ const HomeScreen = ({navigation}) => {
 const style = StyleSheet.create({
   header: {
     marginTop: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     paddingHorizontal: 20,
   },
   inputContainer: {
     flex: 1,
     height: 50,
     borderRadius: 10,
-    flexDirection: 'row',
+    flexDirection: "row",
     backgroundColor: COLORS.light,
-    alignItems: 'center',
+    alignItems: "center",
     paddingHorizontal: 20,
   },
   sortBtn: {
@@ -119,8 +166,8 @@ const style = StyleSheet.create({
     marginLeft: 10,
     backgroundColor: COLORS.primary,
     borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   card: {
     flex: 1,

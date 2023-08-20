@@ -44,6 +44,30 @@ const foods = [
     desc: "Savor the royal flavors of Shahi Paneer, a regal Indian dish fit for kings and queens. Immerse yourself in a creamy tomato-based curry infused with aromatic spices, and delight in the velvety texture of paneer (Indian cottage cheese) that melts in your mouth. A masterpiece of North Indian cuisine, Shahi Paneer is a true culinary indulgence that embodies richness and elegance in every delectable bite.",
     rating: "4.8",
   },
+  {
+    id: 6,
+    name: "Veg Burger",
+    price: "120 rs.",
+    image: require("../../assets/vegburger.png"),
+    desc: "A veg burger is a type of sandwich-like food item that consists of a flavorful and nutritious vegetarian patty enclosed within a bun. The patty is typically made from plant-based ingredients such as vegetables, legumes, grains, and sometimes even tofu or other meat substitutes. Veg burgers offer a meat-free alternative to traditional meat-based burgers, catering to individuals who follow vegetarian or vegan diets, as well as those looking to reduce their meat consumption. These burgers are often accompanied by a variety of toppings and condiments, such as lettuce, tomato, onions, pickles, cheese (vegan or dairy), ketchup, mustard, and special sauces, creating a satisfying and diverse culinary experience.",
+    rating: "4.7",
+  },
+  {
+    id: 7,
+    name: "Chicken Pizza",
+    price: "150 rs.",
+    image: require("../../assets/chickenpizza.jpeg"),
+    desc: "Chicken pizza is a delectable and savory dish that features a crispy pizza crust topped with a flavorful combination of cooked chicken pieces, melted cheese, and an array of complementary ingredients. These ingredients can include items such as tangy tomato sauce, aromatic herbs, vegetables like bell peppers and onions, and sometimes even a drizzle of zesty barbecue or buffalo sauce. The tender and succulent chicken adds a protein-rich element to the pizza, enhancing its taste and texture. Chicken pizza strikes a balance between the familiar comfort of pizza and the satisfying taste of well-seasoned and cooked chicken, making it a popular choice among pizza enthusiasts who enjoy a fusion of flavors in their meals.",
+    rating: "4.0",
+  },
+  {
+    id: 8,
+    name: "Chilli Potato",
+    price: "90 rs.",
+    image: require("../../assets/chillipotato.png"),
+    desc: "Chilli Potato is a popular Indo-Chinese dish known for its fiery and flavorful profile. It typically consists of deep-fried potato cubes that are tossed in a tangy and spicy sauce. The sauce is often a combination of soy sauce, tomato ketchup, vinegar, and various spices, resulting in a sweet, savory, and slightly tangy taste. Chilli Potato is a beloved snack or appetizer in many parts of India and beyond, appreciated for its balance of textures and the delightful contrast between the crispiness of the potatoes and the boldness of the sauce. It can be customized with different levels of spiciness to suit individual preferences.",
+    rating: "3.9",
+  },
 ];
 
 export default foods;

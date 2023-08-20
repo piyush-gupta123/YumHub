@@ -50,7 +50,9 @@ const DetailsCard = ({ navigation, route }) => {
           </Text>
           <Text style={style.detailsText}>{item.desc}</Text>
           <View style={style.rating}>
-            <Text style={{ fontSize: 20, fontWeight: "700", color: COLORS.yellow }}>
+            <Text
+              style={{ fontSize: 20, fontWeight: "700", color: COLORS.yellow }}
+            >
               Rating : {item.rating}
             </Text>
             <Icon
@@ -60,7 +62,11 @@ const DetailsCard = ({ navigation, route }) => {
             />
           </View>
           <View style={style.price}>
-            <Text style={{fontSize: 20,fontWeight: "500", color: COLORS.black}}>PRICE : {item.price}</Text>
+            <Text
+              style={{ fontSize: 20, fontWeight: "500", color: COLORS.black }}
+            >
+              PRICE : {item.price}
+            </Text>
           </View>
         </View>
       </ScrollView>
@@ -101,8 +107,8 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 10,
-
-  }
+    marginBottom: 70,
+  },
 });
 
 export default DetailsCard;
