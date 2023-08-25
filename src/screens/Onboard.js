@@ -11,31 +11,40 @@ import { SliderBox } from "react-native-image-slider-box";
 
 const images = [
   require("../../assets/Boarding_Images/startingImage.png"),
-  require("../../assets/Boarding_Images/image2.jpg"),
   require("../../assets/Boarding_Images/image3.png"),
+  require("../../assets/Boarding_Images/image2.jpg"),
   require("../../assets/Boarding_Images/image4.png"),
-  require("../../assets/Boarding_Images/image5.jpg"),
 ];
 
 export default function Onboard({ navigation }) {
   return (
     <SafeAreaView style={style.container}>
-      <View style={{height: "80%", justifyContent: "center", alignItems: "center"}}>
-        <SliderBox
-          images={images}
-          sliderBoxHeight={50}
-          dotColor={COLORS.primary}
-          inactiveDotColor="grey"
-          autoplay
-          circleLoop
-          paginationBoxVerticalPadding={30}
-          ImageComponentStyle={{
-            height: 400,
-            width: 400,
-            borderRadius: 50,
-            marginTop: 60,
-          }}
-        />
+      <View
+        style={{
+          height: "80%",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 10,
+        }}
+      >
+        <View style={{ borderRadius: 50, marginTop: 20 }}>
+          <SliderBox
+            images={images}
+            sliderBoxHeight={50}
+            dotColor={COLORS.primary}
+            inactiveDotColor="grey"
+            imageLoadingColor={COLORS.primary}
+            autoplay
+            circleLoop
+            paginationBoxVerticalPadding={30}
+            ImageComponentStyle={{
+              height: 400,
+              width: 400,
+              borderRadius: 50,
+              marginTop: 60,
+            }}
+          />
+        </View>
         <TouchableOpacity
           style={{ marginTop: 20, width: "100%" }}
           onPress={() => navigation.navigate("HomeScreen")}
