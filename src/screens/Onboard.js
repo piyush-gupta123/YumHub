@@ -46,8 +46,8 @@ export default function Onboard({ navigation }) {
           />
         </View>
         <TouchableOpacity
-          style={{ marginTop: 20, width: "100%" }}
-          onPress={() => navigation.navigate("HomeScreen")}
+          style={{ marginTop: 20, width: "100%", cursor: "pointer" }}
+          onPress={() => navigation.navigate("Auth")}
         >
           <View style={style.button}>
             <Text
@@ -76,5 +76,6 @@ const style = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
+    cursor: "pointer",
   },
 });
