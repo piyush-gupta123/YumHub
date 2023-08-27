@@ -47,7 +47,7 @@ export default function Onboard({ navigation }) {
         </View>
         <TouchableOpacity
           style={{ marginTop: 20, width: "100%", cursor: "pointer" }}
-          onPress={() => navigation.navigate("Auth")}
+          onPress={() => navigation.navigate("Login")}
         >
           <View style={style.button}>
             <Text

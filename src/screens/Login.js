@@ -10,12 +10,12 @@ import React from "react";
 import COLORS from "../consts/colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-export default function Auth({ navigation }) {
+export default function Login({ navigation }) {
   return (
     <SafeAreaView>
       <View style={Styles.header}>
         <Icon name="arrow-back-ios" size={28} onPress={navigation.goBack} />
-        <Text style={{ fontSize: 20, fontWeight: "bold" }}>Details</Text>
+        {/* <Text style={{ fontSize: 20, fontWeight: "bold" }}>Details</Text> */}
       </View>
       <View style={Styles.headview}>
         <Text style={Styles.heading}>LOGIN</Text>
@@ -23,15 +23,21 @@ export default function Auth({ navigation }) {
       <Text style={Styles.text}>UserName : </Text>
       <TextInput style={Styles.textInput} placeholder="Username" />
       <Text style={Styles.text}>Password : </Text>
-      <TextInput style={Styles.textInput} placeholder="Password" />
-      <TouchableOpacity>
+      <TextInput
+        style={Styles.textInput}
+        secureTextEntry={true}
+        placeholder="Password"
+      />
+      <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
         <View style={Styles.btnview}>
           <Text style={Styles.btnText}>Login</Text>
         </View>
       </TouchableOpacity>
-      <View style={Styles.btnview}>
-        <Text style={Styles.btnText}>Sign Up</Text>
-      </View>
+      <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+        <View style={Styles.btnview}>
+          <Text style={Styles.btnText}>Sign Up</Text>
+        </View>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -67,7 +73,7 @@ const Styles = StyleSheet.create({
     borderRadius: 50,
     width: "80%",
     alignSelf: "center",
-    marginTop: 40,
+    marginTop: 20,
   },
   textInput: {
     height: 40,
@@ -94,10 +100,4 @@ const Styles = StyleSheet.create({
     fontWeight: "600",
     color: COLORS.white,
   },
-//   footer: {
-//     marginTop: 20,
-//     flexDirection: "row",
-//     justifyContent: "center",
-//     alignItems: "center"
-//   },
 });
