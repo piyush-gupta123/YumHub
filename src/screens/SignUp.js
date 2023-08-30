@@ -12,6 +12,7 @@ import COLORS from "../consts/colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 export default function SignUp({ navigation }) {
+  
   return (
     <SafeAreaView>
       <View style={Styles.header}>

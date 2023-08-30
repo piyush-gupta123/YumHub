@@ -9,8 +9,17 @@ import {
 import React from "react";
 import COLORS from "../consts/colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import axios from "axios";
 
 export default function Login({ navigation }) {
+  const handleLogin = async(req)=>{
+    const fetchResults = await axios.post(`localhost:5000/user/login`,{
+      email: req.email,
+      password: req.password
+    })
+    console.log("fetch results",fetchResults)
+    navigation.navigate("HomeScreen")
+  }
   return (
     <SafeAreaView>
       <View style={Styles.header}>
@@ -28,7 +37,7 @@ export default function Login({ navigation }) {
         secureTextEntry={true}
         placeholder="Password"
       />
-      <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
+      <TouchableOpacity onPress={handleLogin}>
         <View style={Styles.btnview}>
           <Text style={Styles.btnText}>Login</Text>
         </View>
