@@ -7,12 +7,32 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import COLORS from "../consts/colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import axios from "axios";
 
 export default function SignUp({ navigation }) {
-  
+  const [cpassword, setCpassword] = useState("");
+  const handlePassword = (e) => {
+    setCpassword(e.target.value);
+  };
+  const handleSignUp = async (req) => {
+    const { name, email, mobile, adddress, password } = req.body;
+
+    if (password === cpassword) {
+      const data = await axios.post(`http://localhost:5000/user/signup`, {
+        name,
+        email,
+        mobile,
+        adddress,
+        password
+      });
+    }
+    else{
+      alert('Invalid Credentials')
+    }
+  };
   return (
     <SafeAreaView>
       <View style={Styles.header}>
@@ -28,7 +48,11 @@ export default function SignUp({ navigation }) {
           <Text style={Styles.heading}>SIGN UP</Text>
         </View>
         <Text style={Styles.text}>UserName : </Text>
-        <TextInput style={Styles.textInput} autoCapitalize="words" placeholder="Username" />
+        <TextInput
+          style={Styles.textInput}
+          autoCapitalize="words"
+          placeholder="Username"
+        />
         <Text style={Styles.text}>Email : </Text>
         <TextInput style={Styles.textInput} placeholder="Email" />
         <Text style={Styles.text}>Mobile Number : </Text>
@@ -63,9 +87,11 @@ export default function SignUp({ navigation }) {
         <TextInput
           style={Styles.textInput}
           secureTextEntry={true}
+          value={cpassword}
+          onChange={handlePassword}
           placeholder="Confirm Password"
         />
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleSignUp}>
           <View style={Styles.btnview}>
             <Text style={Styles.btnText}>Sign Up</Text>
           </View>

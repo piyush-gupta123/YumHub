@@ -13,7 +13,7 @@ import axios from "axios";
 
 export default function Login({ navigation }) {
   const handleLogin = async(req)=>{
-    const fetchResults = await axios.post(`localhost:5000/user/login`,{
+    const fetchResults = await axios.post(`http://localhost:5000/user/login`,{
       email: req.email,
       password: req.password
     })
