@@ -1,17 +1,18 @@
 import Express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import userRouter from "./Routes/user-routes";
-mongoose.set('strictQuery',true)
+import userRouter from "./Routes/user-routes.js";
+import bodyParser from "body-parser";
+mongoose.set("strictQuery", true);
 
 const app = Express();
 
-app.use(Express.json());
-app.use('/user',userRouter);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use("/user", userRouter);
 
 dotenv.config();
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
 
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -20,4 +21,4 @@ mongoose
   })
   .then(() => app.listen(PORT))
   .then(() => console.log(`Server is connected at ${PORT}`))
-  .catch((err)=>console.log(err))
+  .catch((err) => console.log(err));

@@ -1,11 +1,11 @@
-import User from "../Database/UserSchema";
+import User from "../Database/UserSchema.js";
 import bcrypt from "bcrypt";
 
 export const signup = async (req, res) => {
   const { name, email, mobile, address, password } = req.body;
   try {
     if (!name || !email || !password) {
-      return res.status(400).json({ Message: "Please Enter all credentials" });
+      return res.status(400).json({ Message: `Please Enter all credentials` });
     }
 
     const existingUser = await User.findOne({ email: email });
