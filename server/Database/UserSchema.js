@@ -1,28 +1,29 @@
 import mongoose from "mongoose";
 
-const Schema = mongoose.Schema;
+const schema = mongoose.Schema;
 
-const userSchema = new Schema({
-  name: {
+const userSchema = new schema({
+  username: {
     type: String,
     required: true,
-    unique: true,
   },
   email: {
     type: String,
     required: true,
     unique: true,
   },
+  mobile: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
   password: {
     type: String,
     required: true,
     minlength: 8,
-  },
-  mobile: {
-    type: Number,
-  },
-  address: {
-    type: String,
   },
 });
 

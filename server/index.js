@@ -1,16 +1,18 @@
-import Express from "express";
+import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import userRouter from "./Routes/user-routes.js";
-import bodyParser from "body-parser";
+// import bodyParser from "body-parser";
 mongoose.set("strictQuery", true);
 
-const app = Express();
+const app = express();
+dotenv.config();
 
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json())
 app.use("/user", userRouter);
 
-dotenv.config();
+
 
 const PORT = process.env.PORT || 5000;
 

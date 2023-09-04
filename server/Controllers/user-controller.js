@@ -1,29 +1,33 @@
-import User from "../Database/UserSchema.js";
+import user from "../Database/UserSchema.js";
 import bcrypt from "bcrypt";
 
-export const signup = async (req, res) => {
-  const { name, email, mobile, address, password } = req.body;
+export const signup = async (req, res, next) => {
+  // console.log("Signup called");
+  const { username, email, mobile, address, password } = req.body;
+  console.log(username);
   try {
-    if (!name || !email || !password) {
+    if (!username || !email || !password) {
       return res.status(400).json({ Message: `Please Enter all credentials` });
     }
 
-    const existingUser = await User.findOne({ email: email });
+    const existingUser = await user.findOne({ email: email });
 
     if (existingUser) {
       return res.status(422).json({ Message: "User already exists" });
     }
 
-    const saltRounds = 12;
+    const saltRounds = 10;
     const hashedPassword = bcrypt.hashSync(password, saltRounds);
 
-    const newUser = new User({
-      name,
-      email,
-      mobile,
-      address,
-      hashedPassword,
+    const newUser = new user({
+      username: username,
+      email: email,
+      mobile: mobile,
+      address: address,
+      password: hashedPassword,
     });
+
+    console.log(newUser._id);
 
     await newUser.save();
 
@@ -41,7 +45,7 @@ export const login = async (req, res) => {
       return res.status(400).json({ Message: "Please enter all credentials" });
     }
 
-    const existingUser = await User.findOne({ email: email });
+    const existingUser = await user.findOne({ email: email });
 
     if (!existingUser) {
       return res
